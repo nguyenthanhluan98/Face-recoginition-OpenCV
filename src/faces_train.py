@@ -6,9 +6,10 @@ import pickle
 
 def train():
 	BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-	image_dir = os.path.join(BASE_DIR, "images")
+	image_dir = os.path.join(BASE_DIR, "ima_user")
 
-	face_cascade = cv2.CascadeClassifier('cascades/data/haarcascade_frontalface_alt2.xml')
+
+	face_cascade = cv2.CascadeClassifier('cascades/data/haarcascade_frontalface_alt.xml')
 	recognizer = cv2.face.LBPHFaceRecognizer_create()
 
 	current_id = 0
@@ -29,18 +30,21 @@ def train():
 				#print(label_ids)
 				#y_labels.append(label) # some number
 				#x_train.append(path) # verify this image, turn into a NUMPY arrray, GRAY
+				
 				pil_image = Image.open(path).convert("L") # grayscale
-
+				
+				
 				width, height = pil_image.size
-				
-				
+			
+				'''
 				if(width > 300 or height > 300):
+					#im = cv2.imread(path)
+					#small = cv2.resize(im, (220, 220), fx=0.5, fy=0.5)
+					#cv2.imwrite("im1.jpg", small)
 					size = (300, 300)
 					pil_image = pil_image.resize(size, Image.ANTIALIAS)
-				#width1, height1 = pil_image.size
-				#print("after width: " , width1, "height: ", height1)
-				
-
+					#cv2.imwrite("test.jpg", pil_image)
+				'''
 			#	size = (550, 550)
 			#	final_image = pil_image.resize(size, Image.ANTIALIAS)
 				image_array = np.array(pil_image, "uint8")
@@ -61,3 +65,4 @@ def train():
 
 	recognizer.train(x_train, np.array(y_labels))
 	recognizer.save("recognizers/train.yml")
+train()

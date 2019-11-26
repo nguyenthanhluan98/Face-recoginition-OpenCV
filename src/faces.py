@@ -3,10 +3,8 @@ import cv2
 import pickle
 def recogFace():
 
-	face_cascade = cv2.CascadeClassifier('cascades/data/haarcascade_frontalface_alt2.xml')
-	eye_cascade = cv2.CascadeClassifier('cascades/data/haarcascade_eye.xml')
-	smile_cascade = cv2.CascadeClassifier('cascades/data/haarcascade_smile.xml')
-
+	face_cascade = cv2.CascadeClassifier('cascades/data/haarcascade_frontalface_alt.xml')
+	
 
 	recognizer = cv2.face.LBPHFaceRecognizer_create()
 	recognizer.read("./recognizers/train.yml")
@@ -45,7 +43,7 @@ def recogFace():
 
 			print("conf: ", conf)
 
-			if conf >= 40 and conf <= 85:
+			if conf <= 50:
 			#	print("id: ", id_)qqqqq
 			#	print(labels[id_])
 				font = cv2.FONT_HERSHEY_SIMPLEX
